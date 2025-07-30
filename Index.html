@@ -134,8 +134,8 @@
                 <div class="text-2xl text-white font-bold text-center">About Me</div>
             </div>
         </div>
-        <div class="mt-2 bg-white rounded-b-lg flex items-center mb-5 drop-shadow-lg">
-            <div class="bg-gray-300 w-1/2 rounded-bl-lg flex justify-center py-5">
+        <div class="mt-2 bg-white rounded-b-lg lg:flex items-center mb-5 drop-shadow-lg md:flex-none">
+            <div class="bg-gray-300 lg:w-1/2 lg:rounded-bl-lg flex justify-center py-5">
                 <img src="/img/gabungan.png" alt="" class="size-80">
             </div>
             <div class="p-3 max-w-2xl">
@@ -289,19 +289,19 @@
                 </p>
 
                 <!-- Formulir Kontak -->
-                <form action="#" method="POST" class="space-y-4 text-left">
-                    <input type="text" placeholder="Nama Anda"
+                <form id="contact-form" action="#" method="POST" class="space-y-4 text-left">
+                    <input name="nama" type="text" placeholder="Nama Anda"
                         class="w-full border border-gray-300 rounded px-4 py-2" />
-                    <input type="email" placeholder="Email" class="w-full border border-gray-300 rounded px-4 py-2"
+                    <input name="email" type="email" placeholder="Email" class="w-full border border-gray-300 rounded px-4 py-2"
                         required />
-                    <textarea placeholder="Pesan..." rows="5" class="w-full border border-gray-300 rounded px-4 py-2" required></textarea>
-                    <button type="submit" class="bg-teal-700 hover:bg-teal-900 text-white px-6 py-2 rounded">
+                    <textarea placeholder="Pesan..." name="pesan" rows="5" class="w-full border border-gray-300 rounded px-4 py-2" required></textarea>
+                    <button name="" type="submit" class="bg-teal-700 hover:bg-teal-900 text-white px-6 py-2 rounded">
                         Kirim
                     </button>
                 </form>
 
                 <!-- Info Kontak -->
-                <div class="mt-10 text-sm text-gray-600 flex justify-between">
+                <div class="mt-10 text-sm text-gray-600 lg:flex justify-between sm:flex-none">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-10" width="24" height="24"
                             viewBox="0 0 24 24">
@@ -369,6 +369,26 @@
             aboutText.classList.add("opacity-100");
         }, 500);
     }, 4000); // Ganti setiap 4 detik
+</script>
+
+<!-- sript form -->
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzDuhl2L79vGBYIkbQ3pdvzxaBZ4zIHveH7UooCxTNyRnCgv7KYWeUKanb9RMg6xGFfMw/exec';
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+    
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            alert('Pesan berhasil dikirim!');
+            form.reset();
+        })
+        .catch(error => {
+            alert('Gagal mengirim pesan. Coba lagi.');
+            console.error('Error!', error.message);
+        });
+    });
 </script>
 
 </html>
